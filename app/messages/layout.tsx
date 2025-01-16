@@ -3,9 +3,14 @@ export default async function MessagesLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // The MessagesPage(page.tsx) component is also calling the same request but with different options ( headers) and hence 2 calls will be fired
+  // If the request and its configs are same, you will see only one call
+  const response = await fetch('http://localhost:8080/messages', {
+    headers: {
+      'x-id': 'layout file',
+    },
+  });
 
-  const response = await fetch('http://localhost:8080/messages');
-  
   const messages = await response.json();
   const totalMessages = messages.length;
 
