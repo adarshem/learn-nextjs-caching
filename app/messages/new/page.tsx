@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-
+import { revalidateTag } from 'next/cache';
 import { addMessage } from '@/lib/messages';
 
 export default function NewMessagePage() {
@@ -8,6 +8,12 @@ export default function NewMessagePage() {
 
     const message = formData.get('message') as string;
     addMessage(message);
+    // Revalidate the cache associated with the messages route
+    // revalidatePath('/messages');
+    // Revalidate the cache associated with the messages route and all sub routes
+    // revalidatePath('/messages', 'layout')
+    // Revalidate the cache associated with the tag 'msg'
+    revalidateTag('msg');
     redirect('/messages');
   }
 

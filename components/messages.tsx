@@ -1,8 +1,5 @@
-export default function Messages({
-  messages,
-}: {
-  messages: { id: string; text: string }[];
-}) {
+import { Message } from '@/lib/types';
+export default function Messages({ messages }: { messages: Message[] }) {
   return (
     <ul className="messages">
       {messages.map((message) => (
